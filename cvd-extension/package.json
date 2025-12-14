@@ -1,0 +1,26 @@
+{
+  "name": "cvd-color-assistant",
+  "version": "1.0.0",
+  "description": "智能色觉辅助 Chrome 扩展 - 帮助色觉缺陷用户更好地浏览网页",
+  "scripts": {
+    "icons": "node scripts/create-icons.js",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "canvas": "^2.11.2"
+  },
+  "keywords": [
+    "chrome-extension",
+    "color-blindness",
+    "accessibility",
+    "cvd",
+    "color-vision-deficiency"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
+

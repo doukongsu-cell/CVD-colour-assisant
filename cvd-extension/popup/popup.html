@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CVD Color Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">👁️</span>
+        <div class="logo-text">
+          <h1>CVD Color Assistant</h1>
+          <span class="version">v1.0.0</span>
+        </div>
+      </div>
+      <label class="main-toggle">
+        <input type="checkbox" id="enableToggle">
+        <span class="toggle-slider"></span>
+      </label>
+    </header>
+
+    <!-- CVD Type Selection -->
+    <section class="section">
+      <h2 class="section-title">
+        <span class="icon">🎨</span>
+        Color Vision Deficiency Type
+      </h2>
+      <div class="cvd-types">
+        <label class="cvd-type-card" data-type="protanomaly">
+          <input type="radio" name="cvdType" value="protanomaly">
+          <div class="card-content">
+            <span class="card-icon">🔴</span>
+            <span class="card-title">Red Weak</span>
+            <span class="card-desc">Protanomaly</span>
+          </div>
+        </label>
+        <label class="cvd-type-card" data-type="deuteranomaly">
+          <input type="radio" name="cvdType" value="deuteranomaly" checked>
+          <div class="card-content">
+            <span class="card-icon">🟢</span>
+            <span class="card-title">Green Weak</span>
+            <span class="card-desc">Deuteranomaly</span>
+          </div>
+        </label>
+        <label class="cvd-type-card" data-type="tritanomaly">
+          <input type="radio" name="cvdType" value="tritanomaly">
+          <div class="card-content">
+            <span class="card-icon">🔵</span>
+            <span class="card-title">Blue-Yellow Weak</span>
+            <span class="card-desc">Tritanomaly</span>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Severity Slider -->
+    <section class="section">
+      <h2 class="section-title">
+        <span class="icon">📊</span>
+        Simulation Intensity
+        <span class="severity-value" id="severityValue">80%</span>
+      </h2>
+      <div class="slider-container">
+        <input type="range" id="severitySlider" min="0" max="100" value="80" class="slider">
+        <div class="slider-labels">
+          <span>Mild</span>
+          <span>Moderate</span>
+          <span>Severe</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="section">
+      <h2 class="section-title">
+        <span class="icon">⚡</span>
+        Quick Actions
+      </h2>
+      <div class="action-buttons">
+        <button class="action-btn primary" id="recolorBtn">
+          <span class="btn-icon">🎭</span>
+          <span class="btn-text">Smart Recolor</span>
+        </button>
+        <button class="action-btn secondary" id="simulateBtn">
+          <span class="btn-icon">👓</span>
+          <span class="btn-text">Simulate Vision</span>
+        </button>
+        <button class="action-btn secondary" id="inspectorBtn">
+          <span class="btn-icon">🔍</span>
+          <span class="btn-text">Color Inspector</span>
+        </button>
+        <button class="action-btn secondary" id="highlightBtn">
+          <span class="btn-icon">⚠️</span>
+          <span class="btn-text">Highlight Issues</span>
+        </button>
+      </div>
+      <button class="restore-btn" id="restoreBtn">
+        <span class="btn-icon">↩️</span>
+        Restore Original Colors
+      </button>
+    </section>
+
+    <!-- Analysis Report -->
+    <section class="section report-section" id="reportSection">
+      <h2 class="section-title">
+        <span class="icon">📋</span>
+        Page Analysis
+        <button class="refresh-btn" id="refreshReport" title="Refresh Report">🔄</button>
+      </h2>
+      <div class="report-content" id="reportContent">
+        <div class="report-loading">
+          <div class="spinner"></div>
+          <span>Analyzing...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="section settings-section">
+      <h2 class="section-title">
+        <span class="icon">⚙️</span>
+        Settings
+      </h2>
+      <div class="settings-list">
+        <label class="setting-item">
+          <span class="setting-label">Auto Recolor</span>
+          <input type="checkbox" id="autoRecolor" class="setting-toggle">
+          <span class="toggle-slider small"></span>
+        </label>
+        <label class="setting-item">
+          <span class="setting-label">Remember My Settings</span>
+          <input type="checkbox" id="rememberSettings" class="setting-toggle" checked>
+          <span class="toggle-slider small"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Color Preview -->
+    <section class="section preview-section" id="previewSection" style="display: none;">
+      <h2 class="section-title">
+        <span class="icon">🔬</span>
+        Selected Element Analysis
+      </h2>
+      <div class="preview-content" id="previewContent">
+        <!-- Dynamically filled -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span>Helping color vision deficiency users browse the web better</span>
+      <a href="#" id="helpLink">Help</a>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

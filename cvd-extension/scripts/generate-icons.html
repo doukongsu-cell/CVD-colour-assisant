@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>生成 CVD Assistant 图标</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #1a1a2e;
+      color: white;
+    }
+    .icon-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+    .icon-item {
+      text-align: center;
+    }
+    canvas {
+      border: 1px solid #333;
+      border-radius: 8px;
+    }
+    button {
+      margin: 10px 5px;
+      padding: 10px 20px;
+      background: #6366f1;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #4f46e5;
+    }
+    .instructions {
+      background: #252540;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 CVD Color Assistant - 图标生成器</h1>
+  
+  <div class="icon-container">
+    <div class="icon-item">
+      <canvas id="icon16" width="16" height="16"></canvas>
+      <p>16x16</p>
+      <button onclick="download('icon16', 16)">下载</button>
+    </div>
+    <div class="icon-item">
+      <canvas id="icon48" width="48" height="48"></canvas>
+      <p>48x48</p>
+      <button onclick="download('icon48', 48)">下载</button>
+    </div>
+    <div class="icon-item">
+      <canvas id="icon128" width="128" height="128"></canvas>
+      <p>128x128</p>
+      <button onclick="download('icon128', 128)">下载</button>
+    </div>
+  </div>
+
+  <button onclick="downloadAll()">下载所有图标</button>
+
+  <div class="instructions">
+    <h3>使用说明</h3>
+    <ol>
+      <li>点击"下载"按钮下载对应尺寸的图标</li>
+      <li>将下载的图标文件放入 <code>icons</code> 文件夹</li>
+      <li>文件命名为: icon16.png, icon48.png, icon128.png</li>
+    </ol>
+  </div>
+
+  <script>
+    function drawIcon(ctx, size) {
+      const scale = size / 128;
+      
+      // 背景渐变
+      const bgGrad = ctx.createLinearGradient(0, 0, size, size);
+      bgGrad.addColorStop(0, '#6366f1');
+      bgGrad.addColorStop(1, '#8b5cf6');
+      
+      // 绘制圆角背景
+      const radius = 24 * scale;
+      const margin = 8 * scale;
+      ctx.beginPath();
+      ctx.roundRect(margin, margin, size - margin * 2, size - margin * 2, radius);
+      ctx.fillStyle = bgGrad;
+      ctx.fill();
+      
+      // 眼睛外形
+      const eyeGrad = ctx.createLinearGradient(0, 0, size, size);
+      eyeGrad.addColorStop(0, '#ffffff');
+      eyeGrad.addColorStop(1, '#e0e7ff');
+      
+      ctx.beginPath();
+      ctx.ellipse(64 * scale, 64 * scale, 40 * scale, 28 * scale, 0, 0, Math.PI * 2);
+      ctx.fillStyle = eyeGrad;
+      ctx.fill();
+      
+      // 虹膜
+      ctx.beginPath();
+      ctx.arc(64 * scale, 64 * scale, 20 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = '#4f46e5';
+      ctx.fill();
+      
+      // 瞳孔
+      ctx.beginPath();
+      ctx.arc(64 * scale, 64 * scale, 10 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = '#1e1b4b';
+      ctx.fill();
+      
+      // 高光
+      ctx.beginPath();
+      ctx.arc(58 * scale, 58 * scale, 5 * scale, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+      ctx.fill();
+      
+      // 色彩条纹 (只在大尺寸显示)
+      if (size >= 48) {
+        const colors = ['#ef4444', '#22c55e', '#3b82f6', '#eab308'];
+        const barHeight = 8 * scale;
+        const barY = 96 * scale;
+        const barRadius = 4 * scale;
+        
+        colors.forEach((color, i) => {
+          const barWidth = (i === 3 ? 16 : 20) * scale;
+          const barX = (20 + i * 24) * scale;
+          
+          ctx.beginPath();
+          ctx.roundRect(barX, barY, barWidth, barHeight, barRadius);
+          ctx.fillStyle = color;
+          ctx.globalAlpha = 0.9;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+        });
+      }
+    }
+    
+    // 绘制所有尺寸
+    [16, 48, 128].forEach(size => {
+      const canvas = document.getElementById('icon' + size);
+      const ctx = canvas.getContext('2d');
+      drawIcon(ctx, size);
+    });
+    
+    function download(canvasId, size) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = `icon${size}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    
+    function downloadAll() {
+      [16, 48, 128].forEach(size => {
+        setTimeout(() => download('icon' + size, size), size * 10);
+      });
+    }
+  </script>
+</body>
+</html>
+

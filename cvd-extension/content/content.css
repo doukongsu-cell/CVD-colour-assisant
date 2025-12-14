@@ -1,0 +1,203 @@
+/**
+ * CVD Color Assistant - 内容脚本样式
+ */
+
+/* 颜色分析提示框 */
+.cvd-tooltip {
+  position: fixed;
+  z-index: 2147483647;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #e8e8e8;
+  padding: 16px;
+  border-radius: 12px;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  min-width: 280px;
+  max-width: 380px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+  animation: cvdTooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes cvdTooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cvd-tooltip-header {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cvd-tooltip-header::before {
+  content: '🎨';
+  font-size: 16px;
+}
+
+.cvd-tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cvd-tooltip-label {
+  color: #a0a0a0;
+  min-width: 60px;
+}
+
+.cvd-tooltip-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.cvd-tooltip-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 4px;
+}
+
+.cvd-tooltip-badge.pass {
+  background: rgba(46, 213, 115, 0.2);
+  color: #2ed573;
+}
+
+.cvd-tooltip-badge.fail {
+  background: rgba(255, 71, 87, 0.2);
+  color: #ff4757;
+}
+
+.cvd-tooltip-warning {
+  background: rgba(255, 171, 0, 0.15);
+  border: 1px solid rgba(255, 171, 0, 0.3);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  font-size: 12px;
+  color: #ffab00;
+}
+
+.cvd-tooltip-preview {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cvd-tooltip-preview-title {
+  font-size: 12px;
+  color: #a0a0a0;
+  margin-bottom: 8px;
+}
+
+.cvd-tooltip-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.cvd-tooltip-preview-row span:first-child {
+  min-width: 50px;
+  color: #808080;
+}
+
+/* 问题元素高亮样式 */
+[data-cvd-highlighted] {
+  position: relative;
+}
+
+[data-cvd-highlighted]::after {
+  content: '⚠️';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 14px;
+  pointer-events: none;
+  animation: cvdPulse 1.5s infinite;
+}
+
+@keyframes cvdPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+}
+
+/* 检查器模式下的光标样式 */
+body.cvd-inspector-mode {
+  cursor: crosshair !important;
+}
+
+body.cvd-inspector-mode * {
+  cursor: crosshair !important;
+}
+
+/* 重新着色标记 */
+[data-cvd-recolored] {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* 通知样式 */
+.cvd-notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2147483646;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+  animation: cvdSlideIn 0.3s ease-out;
+}
+
+@keyframes cvdSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.cvd-notification.success {
+  background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+}
+
+.cvd-notification.error {
+  background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+}
+
+.cvd-notification.info {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
